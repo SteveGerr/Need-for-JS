@@ -4,7 +4,6 @@ const score    = document.querySelector('.score'),
       car      = document.createElement('div');
 
 car.classList.add('car');
-
 start.addEventListener('click', startGame);
 
 document.addEventListener('keydown', startRun);
@@ -28,11 +27,29 @@ function startGame() {
     start.classList.add('hide');
     requestAnimationFrame(playGame);
     setting.start = true;
+    setting.x = car.offsetLeft;
+    setting.y = car.offsetTop;
     gameArea.appendChild(car); 
 }
 
 function playGame() {
     if (setting.start) {
+        if (keys.ArrowLeft && setting.x > 0) {
+            setting.x -= setting.speed;
+        }
+        if (keys.ArrowRight) {
+            setting.x += setting.speed;
+        }
+        if (keys.ArrowDown) {
+            setting.x += setting.speed;
+        }
+        if (keys.ArrowUp && setting.y > 0) {
+            setting.x -= setting.speed;
+        }
+
+        car.style.left = setting.x + 'px';
+        car.style.top = setting.y + 'px';
+
         requestAnimationFrame(playGame);
 
     }
